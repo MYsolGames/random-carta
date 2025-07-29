@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+		<meta charset="UTF-8">
+		<title>カルタ生成カウンター</title>
+		<style>
+				body {
+					font-family: Arial, sans-serif;
+					padding: 20px;
+					text-align: center;
+				}
+				#counter {
+					font-size: 24px;
+					margin: 10px;
+				}
+				button {
+					font-size: 16px;
+					margin: 5px;
+					padding: 10px 20px;
+				}
+				#karta-list {
+					margin-top: 20px;
+					font-size: 18px;
+				}
+		</style>
+</head>
+<body>
+		<h1>カルタ生成カウンター</h1>
+		
+		<div>
+				<button id="decrease">-</button>
+				<span id="counter">1</span>
+				<button id="increase">+</button>
+		</div>
+		
+		<button id="generate">カルタを生成</button>
+		
+		<div id="karta-list"></div>
+		
+		<script>
+				const min = 1;
+				const max = 5;
+				let count = 1;
+				
+				const counterDisplay = document.getElementById('counter');
+				const decreaseButton = document.getElementById('decrease');
+				const increaseButton = document.getElementById('increase');
+				const generateButton = document.getElementById('generate');
+				const kartaListDiv = document.getElementById('karta-list');
+				
+				// 事前に設定するカルタリスト
+				const kartaList = [
+						'探検セット',
+						'お弁当',
+						'不思議な鍵',
+						'千里丸',
+						'結界札',
+						'星の砂時計',
+						'青銅の手鏡',
+						'二十六年式拳銃',
+						'火垂屋チケット',
+						'飛燕草',
+						'幸運コケシ',
+						'トカゲのしっぽ',
+						'防虫香',
+						'幽かな夜の止まり木',
+						'闇色の羽',
+						'清浄の四葩',
+						'輝く蝶のランタン',
+						'ふたつ穴の蝋燭',
+						'恋の食パン',
+						'畜生サンダル',
+						'ヒバナのお守り',
+						'咲雷の矛',
+						'大きなカバン',
+						'二輪挿し',
+						'収納上手',
+						'内出の小槌',
+						'高品質',
+						'パッシブフリーク',
+						'退魔の響き',
+						'まごころおにぎり',
+						'エネルギー放射',
+						'近代化バッテリー',
+						'メンテナンス',
+						'治癒結界術',
+						'暗黒物質',
+						'鏡研ぎ',
+						'観察眼',
+						'再凝結',
+						'高速転移',
+						'穴ひとつ',
+						'異界の地図',
+						'歩行術',
+						'運足の極意',
+						'力ずく',
+						'魂魄抽出',
+						'霊媒体質',
+						'賄賂',
+						'古書収集家',
+						'カフェイン中毒',
+						'カルタケース',
+						'封じ封じ',
+						'人形呼び',
+						'火垂屋の優待券',
+						'異界の友',
+						'ヒゲダンディ',
+						'基礎持久力',
+						'アドレナリン',
+						'ランナーズハイ',
+						'無鉄砲',
+						'自動扉',
+						'頑丈な扉',
+						'心眼',
+						'安息の地',
+						'おいしいご褒美',
+						'タキサイキア現象',
+						'基礎体力',
+						'勾玉結界',
+						'厄払い',
+						'希望の灯火',
+						'血の還元',
+						'腹ペコの嗅覚',
+						'忍者',
+						'メンタルケア',
+						'切り札',
+						'魂の絆',
+						'天照',
+						'修羅の足枷'
+				];
+				
+				// カウンター増減
+				decreaseButton.addEventListener('click', () => {
+						if (count > min) {
+							count--;
+							counterDisplay.textContent = count;
+						}
+				});
+				
+				increaseButton.addEventListener('click', () => {
+						if (count < max) {
+							count++;
+							counterDisplay.textContent = count;
+						}
+				});
+				
+				generateButton.addEventListener('click', () => {
+					const shuffled = kartaList.sort(() => 0.5 - Math.random());
+					const selected = shuffled.slice(0, count);
+					
+					const sortedSelected = selected.sort((a, b) => {
+							return kartaList.indexOf(a) - kartaList.indexOf(b);
+					});
+					
+					kartaListDiv.innerHTML = '<h2>生成されたカルタ</h2>' +
+							'<ul>' +
+							sortedSelected.map(karta => `<li>${karta}</li>`).join('') +
+							'<ul>';
+				});
+		</script>
+</body>
+</html>
